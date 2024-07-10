@@ -4,8 +4,8 @@ import 'package:sqflite_notetaker/adding.dart';
 import 'package:sqflite_notetaker/database.dart';
 
 class Home extends StatefulWidget {
-  final Database database;
-  const Home({super.key, required this.database});
+  final Database? database;
+  const Home({super.key,  this.database});
 
   @override
   State<Home> createState() => _HomeState();
@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
   }
 
   fetchnotes() async {
-    final data = await widget.database.query('note');
+    final data = await widget.database!.query('note');
     setState(() {
       notes = data;
     });
@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Adding(
-                                                db: widget.database,
+                                                db: widget.database!,
                                                 id: note['id'],
                                                 xtitle: note['title'],
                                                 xsubtitle: note['subtitle'],
@@ -80,7 +80,7 @@ class _HomeState extends State<Home> {
                             IconButton(
                                 onPressed: () async {
                                   setState(() {
-                                    deletenote(widget.database, note['id']);
+                                    deletenote(widget.database!, note['id']);
                                     fetchnotes();
                                   });
                                 },
@@ -104,7 +104,7 @@ class _HomeState extends State<Home> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Adding(
-                          db: widget.database,
+                          db: widget.database!,
                         )));
             if (result != null) {
               fetchnotes();

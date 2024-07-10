@@ -10,8 +10,8 @@ void main() async{
 }
 
 class MyApp extends StatelessWidget {
-  final Database db;
-  const MyApp({super.key, required this.db});
+  final Database? db;
+  const MyApp({super.key,  this.db});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
