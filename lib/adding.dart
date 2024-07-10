@@ -8,7 +8,8 @@ class Adding extends StatefulWidget {
   final int? id;
   final String? xtitle;
   final String? xsubtitle;
-  const Adding({super.key, required this.db,this.xtitle,this.xsubtitle,this.id});
+    final String? xname;
+  const Adding({super.key, required this.db,this.xtitle,this.xsubtitle,this.id,this.xname});
 
   @override
   State<Adding> createState() => _AddingState();
@@ -18,12 +19,14 @@ class _AddingState extends State<Adding> {
 
   TextEditingController titlecontroller= TextEditingController();
   TextEditingController subtitlecontroller= TextEditingController();
+  TextEditingController namecontroller= TextEditingController();
   @override
   void initState() {
     super.initState();
     if(widget.id !=null){
       titlecontroller.text=widget.xtitle ?? '';
       subtitlecontroller.text= widget.xsubtitle ??'';
+      namecontroller.text=widget.xname??'';
     }
   }
 
@@ -37,15 +40,16 @@ class _AddingState extends State<Adding> {
           children: [
            customtextfield(titlecontroller),
            customtextfield(subtitlecontroller),
+           customtextfield(namecontroller),
            
           ],
         ),
       ),
       ElevatedButton(onPressed: () async{
       widget.id==null
-        ? inserting(widget.db, titlecontroller.text, subtitlecontroller.text)
-        : updatenote(widget.db, widget.id!, titlecontroller.text, subtitlecontroller.text);
-        Navigator.pop(context, {'title': titlecontroller.text, 'subtitle': subtitlecontroller.text});
+        ? inserting(widget.db, titlecontroller.text, subtitlecontroller.text,namecontroller.text)
+        : updatenote(widget.db, widget.id!, titlecontroller.text, subtitlecontroller.text,namecontroller.text);
+        Navigator.pop(context, {'title': titlecontroller.text, 'subtitle': subtitlecontroller.text,'name':namecontroller.text});
       }, child:const Text('Add')),
 
     ],),));

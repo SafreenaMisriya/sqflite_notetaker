@@ -54,7 +54,13 @@ class _HomeState extends State<Home> {
                           child: Text((index + 1).toString()),
                         ),
                         title: Text(note['title']),
-                        subtitle: Text(note['subtitle']),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(note['subtitle']),
+                            Text(note['name']),
+                          ],
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -68,6 +74,7 @@ class _HomeState extends State<Home> {
                                                 id: note['id'],
                                                 xtitle: note['title'],
                                                 xsubtitle: note['subtitle'],
+                                                xname: note['name'],
                                               )));
                                               if(result !=null){
                                                 fetchnotes();
